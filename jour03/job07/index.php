@@ -9,12 +9,15 @@
 <body>
 <?php
 
-$str="Les choses que l'on possede finissent par nous posseder";
-$i=-1;
-while (isset($str[$i])){
-    echo $str[$i];
-    $i--;
+$str="Certaines choses changent, et d'autres ne changeront jamais.";
+
+$str2= "";
+for ($i=0;isset($str[$i]);$i++){
+    if ($i>0) {
+        echo $str[$i];
+    }
 }
+echo $str[0];
 
 ?> 
 </body>
