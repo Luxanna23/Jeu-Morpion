@@ -10,11 +10,11 @@
     <?php
    $hauteur=5;
     for ($i=0 ; $i<$hauteur; $i++) { 
-        for ($j = 0; $j <= $hauteur-$i; $j++) {
+        for ($j = 0; $j <$hauteur-$i; $j++) {
             echo "&nbsp";  
         }      
     echo "/"; 
-    for ($j=0; $j<=$i+$i; $j++) {
+    for ($j=0; $j<$i+$i; $j++) {
         echo "&nbsp"; 
     }
     echo "\\</br>"; 
@@ -23,7 +23,7 @@
     for ($i=0; $i<$hauteur;$i++){ 
         echo "_"; 
     } 
-    ?> </br>
+    ?>
 
 </body>
 </html>
