@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <form action="index.php" method="GET">
+    <form action="" method="GET">
         <input type="text" name="str">
         <select name="fonction">
             <option value="gras">gras</option>
@@ -20,84 +20,83 @@
     </form>
     <?php
 
-    $str = isset($_GET['str']) ? $_GET['str'] : null;
+    // var_dump($_GET);
 
-    function gras($str)
-    {
-        $var = isset($_GET['fonction']) ? $_GET['fonction'] : null;
-        $tableauMaj = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-        if ($var == "gras") {
-            $i = 0;
-            while (isset($tableauMaj[$i])) {
-                if ($tableauMaj[$i] == $str[0]) {
-                    $str =  "<b>" . $str . "</b>";
-                }
-                $i++;
-            }
-            return $str;
-        }
-    }
-    echo gras($str);
+    // $str = condition       ? valeur si vrai : valeur si faux
+    $str = isset($_GET['str']) ? $_GET['str'] : null; // POURQUOI NULL MARCHE ET PAS "" ALORS QUE C PLUS LOGIQUE??
+     
+    $tableauMaj = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+    $tableauMin = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
+    
 
-    function cesar($str, $decalage=2)
-    {
-        $var = isset($_GET['fonction']) ? $_GET['fonction'] : null;
-        if ($var == "cesar") {
-            $tableauMaj = array("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-            $tableauMin = array("a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z");
-            $i = 0;
-            while (isset($str[$i])) {
-                $j = 0;
-                while (isset($tableauMaj[$j])) {
-                    if ($str[$i] == $tableauMaj[$j]) {
-                        if (($j + $decalage) > 25){
-                            $str[$i] = $tableauMaj[$j + $decalage - 25];
-                            echo $str[$i];
-                        }
-                        
-                    }
-                    $j++;
-                }
-                $j = 0;
-                while (isset($tableauMin[$j])) {
-                    if ($str[$i] == $tableauMin[$j]) {
-                        if (($j + $decalage) > 25){
-                        $str[$i] = $tableauMin[$j + $decalage - 25];
-                        echo $str[$i];
-                        }
-                    }
-                    $j++;
-                }
-                $i++;
+    function gras($str){
+        $i = 0;
+        // on parcourt les maj
+        while (isset($tableauMaj[$i])) {
+
+            if ($tableauMaj[$i] == $str[0]) {
+                $str =  "<b>" . $str . "</b>";
             }
+            $i++;
         }
+        return $str;
     }
 
-    function plateforme($str)
-    {
-        $var = isset($_GET['fonction']) ? $_GET['fonction'] : null;
-        if ($var == "plateforme") {
-            $car = "";
-            $i = 0;
-            while (isset($str[$i])) {
-                if ($str[$i] == "m" && $str[$i + 1] == "e") {
-                    $str = $str . "_";
-                }
-                $i++;
+    function cesar($str, $decalage = 2){
+        $res = "";
+        $i = 0;
+        // on parcourt str
+        while (isset($str[$i])) {
+            $j = 0;
+            // on parcourt l'alphabet
+            while (isset($tableauMaj[$j], $tableauMin[$j])) {
+                // gestion dépassement de 26
+                $decalageMod = ($j + $decalage) % 26;
+                // assigne la lettre correspondant en fonction de la casse
+                if ($str[$i] === $tableauMaj[$j])  $res = $res .  $tableauMaj[$decalageMod];
+                else if ($str[$i] === $tableauMin[$j])  $res = $res .  $tableauMin[$decalageMod];
+                $j++;
             }
-            return $str;
+            $i++;
         }
+        return $res;
     }
-    echo plateforme($str);
+
+    function plateforme($str){
+        $i = 0;
+        // Tq on est dans le mot on incrémente i (nb lettres)
+        while (isset($str[$i])) {
+            $i++;
+        }
+
+        // Si dernier = e et avant-dernier = m, ajouter "_"
+        if ($str[$i - 1] == "e" && $str[$i - 2] == "m") {
+            $str = $str . "_";
+        }
+        return $str;
+    }
+
+    //tests
+    echo gras("Gras") . "</br>";
+    echo gras("pas gras") . "</br>";
+    echo cesar("abcdef") . "</br>";
+    echo plateforme("Test") . "</br>";
+    echo plateforme("Testme") . "</br>";
+
     // la liste deroulante
-
-    if (isset($_GET["fonction"]) && ($_GET != null)) {
-        if ($_GET["fonction"] == "gras") {
-            gras($_GET['str']);
-        } else if ($_GET["fonction"] == "cesar") {
-            cesar($_GET['str']);
-        } else if ($_GET["fonction"] == "plateforme") {
-            plateforme($_GET['str']);
+    if (isset($_GET["fonction"])) {
+        switch ($_GET["fonction"]) {
+            case  "gras":
+                gras($_GET['str']);
+                break;
+            case "cesar":
+                cesar($_GET['str']);
+                break;
+            case "plateforme":
+                plateforme($_GET['str']);
+                break;
+            default:
+                break;
         }
     }
     ?>
