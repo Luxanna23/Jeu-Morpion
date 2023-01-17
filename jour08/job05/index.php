@@ -97,6 +97,108 @@
         - Le joueur 2 jouera les "O".</br>
         Chaque joueur va à tour de rôle cocher l'une des 9 cases de la grille. </br>
         Le premier à aligner trois symboles identiques horizontalement, verticalement ou en diagonale gagne la partie.</p>
+    
+    <?php
+
+    function CreationCookie($case)
+    {   
+        if (isset($_POST["$case"]) && $_POST["$case"] == "") {
+            $x= aQuiLeTour($_COOKIE["tour"]);
+            setcookie($case, $x, time() + 3600);
+            
+            setcookie("tour", $_COOKIE["tour"] += 1, time() + 3600);
+            
+            //echo aQuiLeTour($_COOKIE["tour"]);
+            //header("Refresh:0");
+        }
+    }
+    function affichage($case) { // on affiche dans la case le symbole
+        if(isset($_COOKIE[$case])) echo $_COOKIE[$case]; }
+
+    CreationCookie("case1");
+    CreationCookie("case2");
+    CreationCookie("case3");
+    CreationCookie("case4");
+    CreationCookie("case5");
+    CreationCookie("case6");
+    CreationCookie("case7");
+    CreationCookie("case8");
+    CreationCookie("case9");
+
+    function aQuiLeTour($tour)
+    {
+        if ($tour % 2 == 0) {
+            $symbole = "X";
+            header("Refresh:0");
+        } else {
+            $symbole = "O";
+            header("Refresh:0");
+        }
+        return $symbole;
+    }
+
+    function win()
+    {
+        // LES POSSIBILITE DE GAGNER POUR "X" if ()
+        if (isset($_COOKIE["case1"]) && isset($_COOKIE["case2"]) && isset($_COOKIE["case3"]) && $_COOKIE["case1"] == "X" && $_COOKIE["case1"] == $_COOKIE["case2"] && $_COOKIE["case2"] == $_COOKIE["case3"]) {
+            return "Joueur 1 a gagné la partie!";
+        } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case4"]) && isset($_COOKIE["case7"]) && $_COOKIE["case1"] == "X" && $_COOKIE["case1"] == $_COOKIE["case4"] && $_COOKIE["case4"] == $_COOKIE["case7"]) {
+            return "Joueur 1 a gagné la partie!";
+        } else if (isset($_COOKIE["case2"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case8"]) && $_COOKIE["case2"] == "X" && $_COOKIE["case2"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case8"]) {
+            return "Joueur 1 a gagné la partie!";
+        } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case6"]) && isset($_COOKIE["case9"]) && $_COOKIE["case3"] == "X" && $_COOKIE["case3"] == $_COOKIE["case6"] && $_COOKIE["case6"] == $_COOKIE["case9"]) {
+            return "Joueur 1 a gagné la partie!";
+        } else if (isset($_COOKIE["case4"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case6"]) && $_COOKIE["case4"] == "X" && $_COOKIE["case4"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case6"]) {
+            return "Joueur 1 a gagné la partie!";
+        } else if (isset($_COOKIE["case7"]) && isset($_COOKIE["case8"]) && isset($_COOKIE["case9"]) && $_COOKIE["case7"] == "X" && $_COOKIE["case7"] == $_COOKIE["case8"] && $_COOKIE["case8"] == $_COOKIE["case9"]) {
+            return "Joueur 1 a gagné la partie!";
+        } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case9"]) && $_COOKIE["case1"] == "X" && $_COOKIE["case1"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case9"]) {
+            return "Joueur 1 a gagné la partie!";
+        } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case7"]) && $_COOKIE["case3"] == "X" && $_COOKIE["case3"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case7"]) {
+            return "Joueur 1 a gagné la partie!";
+        }
+
+        // LES POSSIBILITE DE GAGNER POUR "O"
+
+        else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case2"]) && isset($_COOKIE["case3"]) && $_COOKIE["case1"] == "O" && $_COOKIE["case1"] == $_COOKIE["case2"] && $_COOKIE["case2"] == $_COOKIE["case3"]) {
+            return "Joueur 2 a gagné la partie!";
+        } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case4"]) && isset($_COOKIE["case7"]) && $_COOKIE["case1"] == "O" && $_COOKIE["case1"] == $_COOKIE["case4"] && $_COOKIE["case4"] == $_COOKIE["case7"]) {
+            return "Joueur 2 a gagné la partie!";
+        } else if (isset($_COOKIE["case2"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case8"]) && $_COOKIE["case2"] == "O" && $_COOKIE["case2"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case8"]) {
+            return "Joueur 2 a gagné la partie!";
+        } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case6"]) && isset($_COOKIE["case9"]) && $_COOKIE["case3"] == "O" && $_COOKIE["case3"] == $_COOKIE["case6"] && $_COOKIE["case6"] == $_COOKIE["case9"]) {
+            return "Joueur 2 a gagné la partie!";
+        } else if (isset($_COOKIE["case4"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case6"]) && $_COOKIE["case4"] == "O" && $_COOKIE["case4"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case6"]) {
+            return "Joueur 2 a gagné la partie!";
+        } else if (isset($_COOKIE["case7"]) && isset($_COOKIE["case8"]) && isset($_COOKIE["case9"]) && $_COOKIE["case7"] == "O" && $_COOKIE["case7"] == $_COOKIE["case8"] && $_COOKIE["case8"] == $_COOKIE["case9"]) {
+            return "Joueur 2 a gagné la partie!";
+        } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case9"]) && $_COOKIE["case1"] == "O" && $_COOKIE["case1"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case9"]) {
+            return "Joueur 2 a gagné la partie!";
+        } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case7"]) && $_COOKIE["case3"] == "O" && $_COOKIE["case3"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case7"]) {
+            return "Joueur 2 a gagné la partie!";
+        }
+
+        // MATCH NULL 
+
+        else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case2"]) && isset($_COOKIE["case3"]) && isset($_COOKIE["case4"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case6"]) && isset($_COOKIE["case7"]) && isset($_COOKIE["case8"]) && isset($_COOKIE["case9"])){
+            return "Match nul, aucun joueur n'a gagné la partie!";
+        }
+    }
+
+    function desactiver($case) { // on desactive le bouton 
+        if(isset($_COOKIE[$case]) || (win() == true)) echo "disabled";
+    }
+
+    if (isset($_POST["end"])) {
+        foreach ($_COOKIE as $key => $value ){
+            unset($_COOKIE[$key]);
+            setcookie($key, "", time() - 3600);
+        }
+        echo "hihi";
+        setcookie("tour", 0, time() + 3600);
+        header("Refresh:0");
+    }
+    ?>
     <form action="" method="POST">
         <table>
             <tr>
@@ -163,121 +265,6 @@
         </table>
     </form>
 
-    <?php
-
-    function CreationCookie($case)
-    {   
-        if (isset($_POST["$case"]) && $_POST["$case"] == "") {
-            $x= aQuiLeTour($_COOKIE["tour"]);
-            setcookie($case, $x, time() + 3600);
-            
-            setcookie("tour", $_COOKIE["tour"] += 1, time() + 3600);
-            
-            //echo aQuiLeTour($_COOKIE["tour"]);
-            //header("Refresh:0");
-        }
-    }
-    function affichage($case) { // on affiche dans la case le symbole
-        if(isset($_COOKIE[$case])) echo $_COOKIE[$case]; }
-
-    CreationCookie("case1");
-    CreationCookie("case2");
-    CreationCookie("case3");
-    CreationCookie("case4");
-    CreationCookie("case5");
-    CreationCookie("case6");
-    CreationCookie("case7");
-    CreationCookie("case8");
-    CreationCookie("case9");
-
-    function aQuiLeTour($tour)
-    {
-        if ($tour % 2 == 0) {
-            $symbole = "X";
-            header("Refresh:0");
-        } else {
-            $symbole = "O";
-            header("Refresh:0");
-        }
-        return $symbole;
-    }
-
-    function desacBoutton($case){
-        if (isset($_COOKIE[$case])){ "disabled"; 
-        }
-    }
-
-    function win()
-    {
-        // LES POSSIBILITE DE GAGNER POUR "X" if ()
-        if (isset($_COOKIE["case1"]) && isset($_COOKIE["case2"]) && isset($_COOKIE["case3"]) && $_COOKIE["case1"] == "X" && $_COOKIE["case1"] == $_COOKIE["case2"] && $_COOKIE["case2"] == $_COOKIE["case3"]) {
-            return "Joueur 1 a gagné la partie!";
-        } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case4"]) && isset($_COOKIE["case7"]) && $_COOKIE["case1"] == "X" && $_COOKIE["case1"] == $_COOKIE["case4"] && $_COOKIE["case4"] == $_COOKIE["case7"]) {
-            return "Joueur 1 a gagné la partie!";
-        } else if (isset($_COOKIE["case2"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case8"]) && $_COOKIE["case2"] == "X" && $_COOKIE["case2"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case8"]) {
-            return "Joueur 1 a gagné la partie!";
-        } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case6"]) && isset($_COOKIE["case9"]) && $_COOKIE["case3"] == "X" && $_COOKIE["case3"] == $_COOKIE["case6"] && $_COOKIE["case6"] == $_COOKIE["case9"]) {
-            return "Joueur 1 a gagné la partie!";
-        } else if (isset($_COOKIE["case4"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case6"]) && $_COOKIE["case4"] == "X" && $_COOKIE["case4"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case6"]) {
-            return "Joueur 1 a gagné la partie!";
-        } else if (isset($_COOKIE["case7"]) && isset($_COOKIE["case8"]) && isset($_COOKIE["case9"]) && $_COOKIE["case7"] == "X" && $_COOKIE["case7"] == $_COOKIE["case8"] && $_COOKIE["case8"] == $_COOKIE["case9"]) {
-            return "Joueur 1 a gagné la partie!";
-        } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case9"]) && $_COOKIE["case1"] == "X" && $_COOKIE["case1"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case9"]) {
-            return "Joueur 1 a gagné la partie!";
-        } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case7"]) && $_COOKIE["case3"] == "X" && $_COOKIE["case3"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case7"]) {
-            return "Joueur 1 a gagné la partie!";
-        }
-
-        // LES POSSIBILITE DE GAGNER POUR "O"
-
-        else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case2"]) && isset($_COOKIE["case3"]) && $_COOKIE["case1"] == "O" && $_COOKIE["case1"] == $_COOKIE["case2"] && $_COOKIE["case2"] == $_COOKIE["case3"]) {
-            return "Joueur 2 a gagné la partie!";
-        } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case4"]) && isset($_COOKIE["case7"]) && $_COOKIE["case1"] == "O" && $_COOKIE["case1"] == $_COOKIE["case4"] && $_COOKIE["case4"] == $_COOKIE["case7"]) {
-            return "Joueur 2 a gagné la partie!";
-        } else if (isset($_COOKIE["case2"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case8"]) && $_COOKIE["case2"] == "O" && $_COOKIE["case2"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case8"]) {
-            return "Joueur 2 a gagné la partie!";
-        } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case6"]) && isset($_COOKIE["case9"]) && $_COOKIE["case3"] == "O" && $_COOKIE["case3"] == $_COOKIE["case6"] && $_COOKIE["case6"] == $_COOKIE["case9"]) {
-            return "Joueur 2 a gagné la partie!";
-        } else if (isset($_COOKIE["case4"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case6"]) && $_COOKIE["case4"] == "O" && $_COOKIE["case4"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case6"]) {
-            return "Joueur 2 a gagné la partie!";
-        } else if (isset($_COOKIE["case7"]) && isset($_COOKIE["case8"]) && isset($_COOKIE["case9"]) && $_COOKIE["case7"] == "O" && $_COOKIE["case7"] == $_COOKIE["case8"] && $_COOKIE["case8"] == $_COOKIE["case9"]) {
-            return "Joueur 2 a gagné la partie!";
-        } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case9"]) && $_COOKIE["case1"] == "O" && $_COOKIE["case1"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case9"]) {
-            return "Joueur 2 a gagné la partie!";
-        } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case7"]) && $_COOKIE["case3"] == "O" && $_COOKIE["case3"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case7"]) {
-            return "Joueur 2 a gagné la partie!";
-        }
-
-        // MATCH NULL 
-
-        else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case2"]) && isset($_COOKIE["case3"]) && isset($_COOKIE["case4"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case6"]) && isset($_COOKIE["case7"]) && isset($_COOKIE["case8"]) && isset($_COOKIE["case9"])){
-            return "Match nul, aucun joueur n'a gagné la partie!";
-        }
-    }
-
-    function desactiver($case) { // on desactive le bouton 
-        if(isset($_COOKIE[$case])) echo "disabled";
-    }
-
-    if (isset($_POST["end"])) {
-        foreach ($_COOKIE as $key => $value ){
-            unset($_COOKIE[$key]);
-            setcookie($key, "", time() - 3600);
-        }
-        // setcookie("case1", "", time() - 3600);
-        // setcookie("case2", "", time() - 3600);
-        // setcookie("case3", "", time() - 3600);
-        // setcookie("case4", "", time() - 3600);
-        // setcookie("case5", "", time() - 3600);
-        // setcookie("case6", "", time() - 3600);
-        // setcookie("case7", "", time() - 3600);
-        // setcookie("case8", "", time() - 3600);
-        // setcookie("case9", "", time() - 3600);
-        setcookie("tour", 0, time() + 3600);
-        header("Refresh:0");
-    }
-
-    ?>
     <h2><?php echo win() ?></h2>
     <form action="" method="POST">
         <input type="submit" value="Réinitialiser la partie" name="end">
