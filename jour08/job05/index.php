@@ -194,7 +194,6 @@
             unset($_COOKIE[$key]);
             setcookie($key, "", time() - 3600);
         }
-        echo "hihi";
         setcookie("tour", 0, time() + 3600);
         header("Refresh:0");
     }
