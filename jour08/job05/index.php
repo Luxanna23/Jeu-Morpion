@@ -260,14 +260,19 @@
     }
 
     if (isset($_POST["end"])) {
-        setcookie("case2", "", time() - 3600);
-        setcookie("case3", "", time() - 3600);
-        setcookie("case4", "", time() - 3600);
-        setcookie("case5", "", time() - 3600);
-        setcookie("case6", "", time() - 3600);
-        setcookie("case7", "", time() - 3600);
-        setcookie("case8", "", time() - 3600);
-        setcookie("case9", "", time() - 3600);
+        foreach ($_COOKIE as $key => $value ){
+            unset($_COOKIE[$key]);
+            setcookie($key, "", time() - 3600);
+        }
+        // setcookie("case1", "", time() - 3600);
+        // setcookie("case2", "", time() - 3600);
+        // setcookie("case3", "", time() - 3600);
+        // setcookie("case4", "", time() - 3600);
+        // setcookie("case5", "", time() - 3600);
+        // setcookie("case6", "", time() - 3600);
+        // setcookie("case7", "", time() - 3600);
+        // setcookie("case8", "", time() - 3600);
+        // setcookie("case9", "", time() - 3600);
         setcookie("tour", 0, time() + 3600);
         header("Refresh:0");
     }
