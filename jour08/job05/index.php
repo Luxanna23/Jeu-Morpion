@@ -39,10 +39,17 @@
     }
 
     table {
+        width: 300px;
+        height: 300px;
         border-collapse: collapse;
         margin-right: auto;
         margin-left: auto;
         margin-bottom: 3%;
+    }
+
+    tr {
+        width: 350px;
+        height: 100px;
     }
 
     th,
@@ -94,62 +101,62 @@
         <table>
             <tr>
                 <td>
-                    <button type="submit" value="" id="case1" name="case1">
+                    <button type="submit" value="" <?php desactiver("case1"); ?> name="case1">
                         <?php
-                        CreationCookie("case1");
+                        affichage("case1");
                         ?>
                     </button>
                 </td>
                 <td>
-                    <button type="submit" value="" name="case2">
+                    <button type="submit" value="" <?php desactiver("case2"); ?> name="case2">
                         <?php
-                        CreationCookie("case2"); ?>
+                        affichage("case2"); ?>
                     </button>
                 </td>
                 <td>
-                    <button type="submit" value="" name="case3">
+                    <button type="submit" value="" <?php desactiver("case3"); ?> name="case3">
                         <?php
-                        CreationCookie("case3"); ?>
-                    </button>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button type="submit" value="" name="case4">
-                        <?php
-                        CreationCookie("case4"); ?>
-                    </button>
-                </td>
-                <td>
-                    <button type="submit" value="" name="case5">
-                        <?php
-                        CreationCookie("case5"); ?>
-                    </button>
-                </td>
-                <td>
-                    <button type="submit" value="" name="case6">
-                        <?php
-                        CreationCookie("case6"); ?>
+                        affichage("case3"); ?>
                     </button>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <button type="submit" value="" name="case7">
+                    <button type="submit" value="" <?php desactiver("case4"); ?> name="case4">
                         <?php
-                        CreationCookie("case7"); ?>
+                        affichage("case4"); ?>
                     </button>
                 </td>
                 <td>
-                    <button type="submit" value="" name="case8">
+                    <button type="submit" value="" <?php desactiver("case5"); ?> name="case5">
                         <?php
-                        CreationCookie("case8"); ?>
+                        affichage("case5"); ?>
                     </button>
                 </td>
                 <td>
-                    <button type="submit" value="" name="case9">
+                    <button type="submit" value="" <?php desactiver("case6"); ?> name="case6">
                         <?php
-                        CreationCookie("case9") ?>
+                        affichage("case6"); ?>
+                    </button>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit" value="" <?php desactiver("case7"); ?> name="case7">
+                        <?php
+                        affichage("case7"); ?>
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" value="" <?php desactiver("case8"); ?> name="case8">
+                        <?php
+                        affichage("case8"); ?>
+                    </button>
+                </td>
+                <td>
+                    <button type="submit" value="" <?php desactiver("case9"); ?> name="case9">
+                        <?php
+                        affichage("case9") ?>
                     </button>
                 </td>
             </tr>
@@ -159,81 +166,100 @@
     <?php
 
     function CreationCookie($case)
-    {   $i= $_COOKIE["tour"];
+    {   
         if (isset($_POST["$case"]) && $_POST["$case"] == "") {
-            setcookie($case, $case, time() + 3600);
-            $i++;
-            setcookie("tour", $i, time() + 3600);
-            echo aQuiLeTour($_COOKIE["tour"]);
+            $x= aQuiLeTour($_COOKIE["tour"]);
+            setcookie($case, $x, time() + 3600);
+            
+            setcookie("tour", $_COOKIE["tour"] += 1, time() + 3600);
+            
+            //echo aQuiLeTour($_COOKIE["tour"]);
+            //header("Refresh:0");
         }
-        //win();
     }
+    function affichage($case) { // on affiche dans la case le symbole
+        if(isset($_COOKIE[$case])) echo $_COOKIE[$case]; }
+
+    CreationCookie("case1");
+    CreationCookie("case2");
+    CreationCookie("case3");
+    CreationCookie("case4");
+    CreationCookie("case5");
+    CreationCookie("case6");
+    CreationCookie("case7");
+    CreationCookie("case8");
+    CreationCookie("case9");
 
     function aQuiLeTour($tour)
     {
         if ($tour % 2 == 0) {
             $symbole = "X";
+            header("Refresh:0");
         } else {
             $symbole = "O";
+            header("Refresh:0");
         }
-        echo $symbole;
+        return $symbole;
     }
 
     function desacBoutton($case){
-        if (isset($_COOKIE[$case])){ "disabled"; }
+        if (isset($_COOKIE[$case])){ "disabled"; 
+        }
     }
 
     function win()
     {
         // LES POSSIBILITE DE GAGNER POUR "X" if ()
         if (isset($_COOKIE["case1"]) && isset($_COOKIE["case2"]) && isset($_COOKIE["case3"]) && $_COOKIE["case1"] == "X" && $_COOKIE["case1"] == $_COOKIE["case2"] && $_COOKIE["case2"] == $_COOKIE["case3"]) {
-            echo "Joueur 1 a gagné la partie!";
+            return "Joueur 1 a gagné la partie!";
         } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case4"]) && isset($_COOKIE["case7"]) && $_COOKIE["case1"] == "X" && $_COOKIE["case1"] == $_COOKIE["case4"] && $_COOKIE["case4"] == $_COOKIE["case7"]) {
-            echo "Joueur 1 a gagné la partie!";
+            return "Joueur 1 a gagné la partie!";
         } else if (isset($_COOKIE["case2"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case8"]) && $_COOKIE["case2"] == "X" && $_COOKIE["case2"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case8"]) {
-            echo "Joueur 1 a gagné la partie!";
+            return "Joueur 1 a gagné la partie!";
         } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case6"]) && isset($_COOKIE["case9"]) && $_COOKIE["case3"] == "X" && $_COOKIE["case3"] == $_COOKIE["case6"] && $_COOKIE["case6"] == $_COOKIE["case9"]) {
-            echo "Joueur 1 a gagné la partie!";
+            return "Joueur 1 a gagné la partie!";
         } else if (isset($_COOKIE["case4"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case6"]) && $_COOKIE["case4"] == "X" && $_COOKIE["case4"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case6"]) {
-            echo "Joueur 1 a gagné la partie!";
+            return "Joueur 1 a gagné la partie!";
         } else if (isset($_COOKIE["case7"]) && isset($_COOKIE["case8"]) && isset($_COOKIE["case9"]) && $_COOKIE["case7"] == "X" && $_COOKIE["case7"] == $_COOKIE["case8"] && $_COOKIE["case8"] == $_COOKIE["case9"]) {
-            echo "Joueur 1 a gagné la partie!";
+            return "Joueur 1 a gagné la partie!";
         } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case9"]) && $_COOKIE["case1"] == "X" && $_COOKIE["case1"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case9"]) {
-            echo "Joueur 1 a gagné la partie!";
-        } else if (isset($_COOKIE["case7"]) && isset($_COOKIE["case8"]) && isset($_COOKIE["case9"]) && $_COOKIE["case3"] == "X" && $_COOKIE["case3"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case7"]) {
-            echo "Joueur 1 a gagné la partie!";
+            return "Joueur 1 a gagné la partie!";
+        } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case7"]) && $_COOKIE["case3"] == "X" && $_COOKIE["case3"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case7"]) {
+            return "Joueur 1 a gagné la partie!";
         }
 
         // LES POSSIBILITE DE GAGNER POUR "O"
 
         else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case2"]) && isset($_COOKIE["case3"]) && $_COOKIE["case1"] == "O" && $_COOKIE["case1"] == $_COOKIE["case2"] && $_COOKIE["case2"] == $_COOKIE["case3"]) {
-            echo "Joueur 2 a gagné la partie!";
+            return "Joueur 2 a gagné la partie!";
         } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case4"]) && isset($_COOKIE["case7"]) && $_COOKIE["case1"] == "O" && $_COOKIE["case1"] == $_COOKIE["case4"] && $_COOKIE["case4"] == $_COOKIE["case7"]) {
-            echo "Joueur 2 a gagné la partie!";
+            return "Joueur 2 a gagné la partie!";
         } else if (isset($_COOKIE["case2"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case8"]) && $_COOKIE["case2"] == "O" && $_COOKIE["case2"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case8"]) {
-            echo "Joueur 2 a gagné la partie!";
+            return "Joueur 2 a gagné la partie!";
         } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case6"]) && isset($_COOKIE["case9"]) && $_COOKIE["case3"] == "O" && $_COOKIE["case3"] == $_COOKIE["case6"] && $_COOKIE["case6"] == $_COOKIE["case9"]) {
-            echo "Joueur 2 a gagné la partie!";
+            return "Joueur 2 a gagné la partie!";
         } else if (isset($_COOKIE["case4"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case6"]) && $_COOKIE["case4"] == "O" && $_COOKIE["case4"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case6"]) {
-            echo "Joueur 2 a gagné la partie!";
+            return "Joueur 2 a gagné la partie!";
         } else if (isset($_COOKIE["case7"]) && isset($_COOKIE["case8"]) && isset($_COOKIE["case9"]) && $_COOKIE["case7"] == "O" && $_COOKIE["case7"] == $_COOKIE["case8"] && $_COOKIE["case8"] == $_COOKIE["case9"]) {
-            echo "Joueur 2 a gagné la partie!";
+            return "Joueur 2 a gagné la partie!";
         } else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case9"]) && $_COOKIE["case1"] == "O" && $_COOKIE["case1"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case9"]) {
-            echo "Joueur 2 a gagné la partie!";
-        } else if (isset($_COOKIE["case7"]) && isset($_COOKIE["case8"]) && isset($_COOKIE["case9"]) && $_COOKIE["case3"] == "O" && $_COOKIE["case3"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case7"]) {
-            echo "Joueur 2 a gagné la partie!";
+            return "Joueur 2 a gagné la partie!";
+        } else if (isset($_COOKIE["case3"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case7"]) && $_COOKIE["case3"] == "O" && $_COOKIE["case3"] == $_COOKIE["case5"] && $_COOKIE["case5"] == $_COOKIE["case7"]) {
+            return "Joueur 2 a gagné la partie!";
         }
 
         // MATCH NULL 
 
         else if (isset($_COOKIE["case1"]) && isset($_COOKIE["case2"]) && isset($_COOKIE["case3"]) && isset($_COOKIE["case4"]) && isset($_COOKIE["case5"]) && isset($_COOKIE["case6"]) && isset($_COOKIE["case7"]) && isset($_COOKIE["case8"]) && isset($_COOKIE["case9"])){
-            echo "Match nul, aucun joueur n'a gagné la partie!";
+            return "Match nul, aucun joueur n'a gagné la partie!";
         }
     }
 
+    function desactiver($case) { // on desactive le bouton 
+        if(isset($_COOKIE[$case])) echo "disabled";
+    }
+
     if (isset($_POST["end"])) {
-        session_destroy();
-        setcookie("case1", "", time() - 3600);
         setcookie("case2", "", time() - 3600);
         setcookie("case3", "", time() - 3600);
         setcookie("case4", "", time() - 3600);
@@ -243,10 +269,11 @@
         setcookie("case8", "", time() - 3600);
         setcookie("case9", "", time() - 3600);
         setcookie("tour", 0, time() + 3600);
-        // header("Refresh:0");
+        header("Refresh:0");
     }
 
     ?>
+    <h2><?php echo win() ?></h2>
     <form action="" method="POST">
         <input type="submit" value="Réinitialiser la partie" name="end">
     </form>
